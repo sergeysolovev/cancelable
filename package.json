@@ -1,0 +1,34 @@
+{
+  "name": "cancelable",
+  "version": "0.1.0",
+  "description": "Yet another make-cancelable Promise wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergeysolovev/cancelable.git"
+  },
+  "keywords": [
+    "javascript",
+    "promise",
+    "cancelable",
+    "cancel",
+    "react",
+    "es6"
+  ],
+  "author": "Sergey Solovev <me@sergeysolovev.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergeysolovev/cancelable/issues"
+  },
+  "homepage": "https://github.com/sergeysolovev/cancelable#readme",
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-es2015": "6.24.1",
+    "jest": "20.0.4",
+    "regenerator-runtime": "0.10.5",
+    "sinon": "2.3.2"
+  }
+}
