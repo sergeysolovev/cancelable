@@ -108,6 +108,10 @@ npm test
 yarn test
 ```
 
+## Other implementations
+
+Please check out [react-unplug](https://github.com/sergeysolovev/react-unplug).
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
