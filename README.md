@@ -16,10 +16,10 @@ Or you can copy-paste it from [here](https://github.com/sergeysolovev/cancelbl/b
 
 ## Overview
 For React components, that use [fetch](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) to update the state, unmounting can lead to the following issue:
-```
-setState(…): Can only update a mounted or mounting component.
-This usually means you called setState() on an unmounted component. This is a no-op
-```
+
+>setState(…): Can only update a mounted or mounting component.
+>This usually means you called setState() on an unmounted component. This is a no-op
+
 The correct way to fix this issue, according to [the article](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html), is to cancel any callbacks in `componentWillUnmount`, prior to unmounting.
 Suggested `makeCancelable` wraps target promise and returns `cancel()` function, which can be called in `componentWillUnmount`.
 
@@ -110,7 +110,7 @@ yarn test
 
 ## Other implementations
 
-Please check out [react-unplug](https://github.com/sergeysolovev/react-unplug).
+Please check out [react-unplug](https://github.com/sergeysolovev/react-unplug)
 
 ## Contributing
 
