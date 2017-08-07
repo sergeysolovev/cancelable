@@ -31,13 +31,22 @@ For complete specification, see [cancelbl.test.js](https://github.com/sergeysolo
 A typical example of two subsequent fetches without taking care of the method `setState`:
 
 ```javascript
+constructor()
+{
+  super();
+  this.state = {
+    item: {},
+    relatedItems: {}
+  };
+}
+
 componentDidMount() {
   fetchResource(this.props.url)
     .then(item => {
       this.setState({item})
       fetchRelatedResources(item)
         .then(relatedItems => {
-          this.setState({relatedItems});
+          this.setState({item});
         })
         .catch(error => { /* handle */ })
     })
@@ -54,9 +63,19 @@ import cancelbl from 'cancelbl';
 And update the component:
 
 ```javascript
-cancel = cancelbl.default;
+constructor()
+{
+  super();
+  this.state = {
+    item: {},
+    relatedItems: {}
+  };
+  // set initial cancel object:
+  this.cancel = cancelbl.default;
+}
 
 componentDidMount() {
+  // wrap promises with .make and .with:
   this.cancel = cancelbl.make(
     fetchResource(this.props.url),
     item => {
@@ -72,6 +91,7 @@ componentDidMount() {
 }
 
 componentWillUnmount() {
+  // the magic happens here:
   this.cancel.do();
 }
 ```
