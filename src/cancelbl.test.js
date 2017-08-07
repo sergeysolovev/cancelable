@@ -1,12 +1,12 @@
-import cancelable from './cancelable'
+import cancelbl from './cancelbl'
 import sinon from 'sinon'
 
-describe('cancelable.default', () => {
-  it(`should return cancelable, i.e. an object with
+describe('cancelbl.default', () => {
+  it(`should return cancelbl, i.e. an object with
       a property .do that is a function
       a property .extract that has .then function and
       a property .with that is a function`, () => {
-    const cancel = cancelable.default;
+    const cancel = cancelbl.default;
     expect(typeof cancel).toBe('object');
     expect(typeof cancel.do).toBe('function');
     expect(typeof cancel.extract).toBe('object');
@@ -15,12 +15,12 @@ describe('cancelable.default', () => {
   });
 })
 
-describe('cancelable.make(...)', () => {
-  it(`should return cancelable, i.e. an object with
+describe('cancelbl.make(...)', () => {
+  it(`should return cancelbl, i.e. an object with
       a property .do that is a function
       a property .extract that has .then function and
       a property .with that is a function`, () => {
-    const cancel = cancelable.make();
+    const cancel = cancelbl.make();
     expect(typeof cancel).toBe('object');
     expect(typeof cancel.do).toBe('function');
     expect(typeof cancel.extract).toBe('object');
@@ -30,7 +30,7 @@ describe('cancelable.make(...)', () => {
 
   it(`should resolve with undefined value
       when used with empty arguments list`, () => {
-    const cancel = cancelable.make();
+    const cancel = cancelbl.make();
     return cancel.extract.then(
       val => expect(val).toBe(undefined),
       () => Promise.reject('it should resolve'));
@@ -39,7 +39,7 @@ describe('cancelable.make(...)', () => {
   it('should resolve with the same value as resolved @promise', () => {
     const value = Object();
     const promise = Promise.resolve(value);
-    const cancel = cancelable.make(promise);
+    const cancel = cancelbl.make(promise);
     return cancel.extract.then(
       val => expect(val).toBe(value),
       err => Promise.reject('it should resolve'));
@@ -48,7 +48,7 @@ describe('cancelable.make(...)', () => {
   it(`should reject with the same value as rejected @promise`, () => {
     const error = Error();
     const promise = Promise.reject(error);
-    const cancel = cancelable.make(promise);
+    const cancel = cancelbl.make(promise);
     return cancel.extract.then(
       () => Promise.reject('it should not resolve'),
       err => expect(err).toBe(error));
@@ -59,7 +59,7 @@ describe('cancelable.make(...)', () => {
     const error = Error();
     const promise = Promise.reject(error);
     const onfulfilled = sinon.spy();
-    const cancel = cancelable.make(promise, onfulfilled);
+    const cancel = cancelbl.make(promise, onfulfilled);
     return cancel.extract.then(
       () => Promise.reject('it should reject'),
       err => {
@@ -75,7 +75,7 @@ describe('cancelable.make(...)', () => {
     const promise = Promise.reject(error);
     const onrejected = sinon.spy();
     const onfulfilled = sinon.spy();
-    const cancel = cancelable.make(promise, onfulfilled, onrejected);
+    const cancel = cancelbl.make(promise, onfulfilled, onrejected);
     return cancel.extract.then(
       () => {
         expect(onrejected.calledWith(error)).toBe(true);
@@ -91,7 +91,7 @@ describe('cancelable.make(...)', () => {
     const promise = Promise.resolve(value);
     const onrejected = sinon.spy();
     const onfulfilled = sinon.spy();
-    const cancel = cancelable.make(promise, onfulfilled, onrejected);
+    const cancel = cancelbl.make(promise, onfulfilled, onrejected);
     return cancel.extract.then(
       () => {
         expect(onfulfilled.calledWith(value)).toBe(true);
@@ -108,7 +108,7 @@ describe('cancelable.make(...)', () => {
     const promise = Promise.resolve(value);
     const onfulfilled = sinon.spy();
     const onrejected = sinon.spy();
-    const cancel = cancelable.make(promise, onfulfilled, onrejected);
+    const cancel = cancelbl.make(promise, onfulfilled, onrejected);
     cancel.do();
     return cancel.extract.then(
       () => {
@@ -125,7 +125,7 @@ describe('cancelable.make(...)', () => {
     const promise = Promise.reject(error);
     const onfulfilled = sinon.spy();
     const onrejected = sinon.spy();
-    const cancel = cancelable.make(promise, onfulfilled, onrejected);
+    const cancel = cancelbl.make(promise, onfulfilled, onrejected);
     cancel.do();
     return cancel.extract.then(
       () => {
@@ -136,12 +136,12 @@ describe('cancelable.make(...)', () => {
   });
 });
 
-describe('cancelable.make(...).with(...)', () => {
-  it(`should return cancelable, i.e. an object with
+describe('cancelbl.make(...).with(...)', () => {
+  it(`should return cancelbl, i.e. an object with
       a property .do that is a function
       a property .extract that has .then function and
       a property .with that is a function`, () => {
-    const cancelWith = cancelable.make().with();
+    const cancelWith = cancelbl.make().with();
     expect(typeof cancelWith).toBe('object');
     expect(typeof cancelWith.do).toBe('function');
     expect(typeof cancelWith.extract).toBe('object');
@@ -167,7 +167,7 @@ describe('cancelable.make(...).with(...)', () => {
       );
     });
     const outerOnrejected = sinon.spy();
-    cancel = cancelable.make(
+    cancel = cancelbl.make(
       outerPromise,
       outerOnfulfilled,
       outerOnrejected);
@@ -204,7 +204,7 @@ describe('cancelable.make(...).with(...)', () => {
       );
     });
     const outerOnrejected = sinon.spy();
-    cancel = cancelable.make(
+    cancel = cancelbl.make(
       outerPromise,
       outerOnfulfilled,
       outerOnrejected);
@@ -242,7 +242,7 @@ describe('cancelable.make(...).with(...)', () => {
       );
     });
     const outerOnrejected = sinon.spy();
-    cancel = cancelable.make(
+    cancel = cancelbl.make(
       outerPromise,
       outerOnfulfilled,
       outerOnrejected);
